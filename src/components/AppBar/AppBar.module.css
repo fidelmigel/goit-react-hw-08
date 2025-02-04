@@ -1,0 +1,12 @@
+.divInfo {
+  background-color: #333;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+  justify-content: center;
+}
+
+.name {
+  text-align: center;
+}

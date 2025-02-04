@@ -1,0 +1,54 @@
+.loginDiv {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.loginForm {
+  font-family: "Montserrat";
+  height: auto;
+  width: 450px;
+  border: 2px solid #00796b;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.loginField {
+  display: block;
+  width: calc(100% - 40px);
+  margin: 10px auto;
+  padding: 12px;
+  border: 1px solid #b2dfdb;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.loginField:focus {
+  border-color: #004d40;
+  outline: none;
+}
+
+.loginButton {
+  margin: auto;
+  display: flex;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: #004d40;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.loginButton:hover {
+  background-color: #00796b;
+}
+
+.loginParagraph {
+  font-size: 16px;
+}

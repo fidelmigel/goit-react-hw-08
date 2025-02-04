@@ -1,23 +1,57 @@
-import ContactForm from "./components/ContactForm/ContactForm";
-import SearchBox from "./components/SearchBox/SearchBox";
-import ContactList from "./components/ContactList/ContactList";
-import { useDispatch } from "react-redux";
-import { fetchContacts } from "./redux/contactsOps";
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
+import HomePage from "./pages/HomePage/HomePage";
+import NotFound from "./pages/NotFound/NotFound";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { getMeThunk } from "./redux/auth/operations";
+import { PrivateRoure } from "./Routes/PrivateRoute";
+import { RestrictedRoute } from "./Routes/RestrictedRoute";
+import { selectIsRefreshing } from "./redux/auth/selectors";
+import LoginForm from "./components/LoginForm/LoginForm";
+import RegisterForm from "./components/RegistrationForm/RegistrationForm";
+import ContactsPage from "./pages/ContactsPage/ContactsPage";
 
 const App = () => {
   const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(getMeThunk());
   }, [dispatch]);
 
-  return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <SearchBox />
-      <ContactList />
-    </div>
+  return isRefreshing ? null : (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoure>
+                <ContactsPage />
+              </PrivateRoure>
+            }
+          />
+        </Route>
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute>
+              <LoginForm />
+            </RestrictedRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute>
+              <RegisterForm />
+            </RestrictedRoute>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 };
 
